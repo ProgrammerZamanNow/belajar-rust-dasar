@@ -392,3 +392,49 @@ fn while_loop() {
         counter += 1;
     }
 }
+
+#[test]
+fn array_iteration() {
+    let array: [&str; 5] = ["A", "B", "C", "D", "E"];
+    let mut index = 0;
+
+    while index < array.len() {
+        println!("Value : {}", array[index]);
+        index += 1;
+    }
+}
+
+#[test]
+fn array_iteration_for_loop() {
+    let array: [&str; 5] = ["A", "B", "C", "D", "E"];
+
+    for value in array {
+        println!("Value : {}", value);
+    }
+}
+
+#[test]
+fn range() {
+    let range = 0..5;
+    println!("Start : {}", range.start);
+    println!("End : {}", range.end);
+
+    let array: [&str; 5] = ["A", "B", "C", "D", "E"];
+
+    for i in range {
+        println!("{}", array[i]);
+    }
+}
+
+#[test]
+fn range_inclusive() {
+    let range = 0..=4;
+    println!("Start : {}", range.start());
+    println!("End : {}", range.end());
+
+    let array: [&str; 5] = ["A", "B", "C", "D", "E"];
+
+    for i in range {
+        println!("{}", array[i]);
+    }
+}
