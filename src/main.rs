@@ -237,3 +237,43 @@ fn variable_scope() {
 
     // println!("{}", kurniawan); //error
 }
+
+#[test]
+fn stack_heap() {
+    function_a();
+    function_b();
+}
+
+fn function_a() {
+    let a = 10;
+    let b = String::from("Kurniawan");
+    println!("{}, {}", a, b);
+}
+
+fn function_b() {
+    let a = 10;
+    let b = String::from("Eko");
+    println!("{}, {}", a, b);
+}
+
+#[test]
+fn string() {
+    let name: &str = "   Eko Kurniawan Khannedy   ";
+    let trim: &str = name.trim();
+
+    println!("{}", name);
+    println!("{}", trim);
+}
+
+#[test]
+fn string_type() {
+    let mut name: String = String::from("Eko Kurniawan");
+    println!("{}", name);
+
+    name.push_str(" Khannedy");
+    println!("{}", name);
+
+    let budi = name.replace("Eko", "Budi");
+    println!("{}", name);
+    println!("{}", budi);
+}
