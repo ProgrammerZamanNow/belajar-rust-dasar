@@ -7,18 +7,18 @@ fn main() {
 }
 
 #[test]
-fn hello_test(){
+fn hello_test() {
     println!("Hello Test");
 }
 
 #[test]
-fn test_variable(){
+fn test_variable() {
     let name = "Eko Kurniawan Khannedy";
     println!("Hello {}", name);
 }
 
 #[test]
-fn test_mutable(){
+fn test_mutable() {
     let mut name = "Eko Kurniawan Khannedy";
     println!("Hello {}", name);
 
@@ -27,7 +27,7 @@ fn test_mutable(){
 }
 
 #[test]
-fn static_typing(){
+fn static_typing() {
     let name = "Eko Kurniawan Khannedy";
     println!("Hello {}", name);
 
@@ -36,7 +36,7 @@ fn static_typing(){
 }
 
 #[test]
-fn shadowing(){
+fn shadowing() {
     let name = "Eko Kurniawan Khannedy";
     println!("Hello {}", name);
 
@@ -51,19 +51,19 @@ fn shadowing(){
    ini komentar lebih dari satu baris
  */
 #[test]
-fn comment(){
+fn comment() {
     // ini komentar
     println!("Hello"); // ini komentar lagi
 }
 
 #[test]
-fn explicit(){
+fn explicit() {
     let age: i32 = 20;
     println!("{}", age);
 }
 
 #[test]
-fn number(){
+fn number() {
     let a: i8 = 10;
     println!("{}", a);
 
@@ -72,7 +72,7 @@ fn number(){
 }
 
 #[test]
-fn number_conversion(){
+fn number_conversion() {
     let a: i8 = 10;
     println!("{}", a);
 
@@ -88,7 +88,7 @@ fn number_conversion(){
 }
 
 #[test]
-fn numeric_operator(){
+fn numeric_operator() {
     let a = 10;
     let b = 10;
     let c = a * b;
@@ -100,7 +100,7 @@ fn numeric_operator(){
 }
 
 #[test]
-fn augmented_assignment(){
+fn augmented_assignment() {
     let mut a = 10;
     println!("{}", a);
 
@@ -112,7 +112,7 @@ fn augmented_assignment(){
 }
 
 #[test]
-fn boolean(){
+fn boolean() {
     let a = true;
     let b: bool = false;
 
@@ -120,16 +120,16 @@ fn boolean(){
 }
 
 #[test]
-fn comparison(){
+fn comparison() {
     let a = 20;
     let b = 20;
 
-    let result : bool = a >= b;
+    let result: bool = a >= b;
     println!("{}", result);
 }
 
 #[test]
-fn boolean_operator(){
+fn boolean_operator() {
     let absen = 75;
     let nilai_akhir = 80;
 
@@ -141,7 +141,7 @@ fn boolean_operator(){
 }
 
 #[test]
-fn char_type(){
+fn char_type() {
     let char1: char = 'a';
     let char2: char = 'b';
 
@@ -150,7 +150,7 @@ fn char_type(){
 
 
 #[test]
-fn tuple(){
+fn tuple() {
     let mut data: (i32, f64, bool) = (10, 10.5, true);
     println!("{:?}", data);
 
@@ -167,15 +167,50 @@ fn tuple(){
     println!("{:?}", data);
 }
 
-fn unit(){
+fn unit() {
     println!("Hello");
 }
 
 #[test]
-fn test_unit(){
+fn test_unit() {
     let result: () = unit();
     println!("{:?}", result);
 
     let test: () = ();
     println!("{:?}", test);
+}
+
+#[test]
+fn array() {
+    let mut array: [i32; 5] = [1, 2, 3, 4, 5];
+    println!("{:?}", array);
+
+    let a = array[0];
+    let b = array[1];
+    println!("{} {}", a, b);
+
+    array[0] = 10;
+    array[1] = 20;
+    println!("{:?}", array);
+
+    let length = array.len();
+    println!("{}", length);
+}
+
+#[test]
+fn two_dimensional_array() {
+    let matrix: [[i32; 3]; 2] = [
+        [1, 2, 3],
+        [4, 5, 6]
+    ];
+
+    println!("{:?}", matrix);
+    println!("{:?}", matrix[0]);
+    println!("{:?}", matrix[0][0]);
+    println!("{:?}", matrix[0][1]);
+    println!("{:?}", matrix[0][2]);
+    println!("{:?}", matrix[1]);
+    println!("{:?}", matrix[1][0]);
+    println!("{:?}", matrix[1][1]);
+    println!("{:?}", matrix[1][2]);
 }
