@@ -277,6 +277,7 @@ fn string_type() {
     println!("{}", name);
     println!("{}", budi);
 }
+
 #[test]
 fn ownership_rules() {
     let a = 10;
@@ -313,4 +314,20 @@ fn clone() {
     let name2 = name1.clone();
 
     println!("{} {}", name1, name2);
+}
+
+#[test]
+fn if_expression() {
+    let value = 10;
+    let result: &str = if value >= 8 {
+        "Good"
+    } else if value >= 6 {
+        "Not Bad"
+    } else if value >= 3 {
+        "Bad"
+    } else {
+        "Very Bad"
+    };
+
+    println!("{}", result);
 }
