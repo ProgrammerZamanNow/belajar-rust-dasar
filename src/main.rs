@@ -277,3 +277,40 @@ fn string_type() {
     println!("{}", name);
     println!("{}", budi);
 }
+#[test]
+fn ownership_rules() {
+    let a = 10;
+
+    {
+        let b = 10;
+        println!("{}", b);
+    }
+
+    println!("{}", a);
+}
+
+#[test]
+fn data_copy() {
+    let a = 10;
+    let b = a;
+
+    println!("{} {}", a, b);
+}
+
+#[test]
+fn ownership_movement() {
+    let name1: String = String::from("Eko");
+    println!("{}", name1);
+
+    let name2: String = name1; // ownerhsip pindah ke name2
+    println!("{}", name2);
+    // println!("{}", name1);
+}
+
+#[test]
+fn clone() {
+    let name1 = String::from("Eko");
+    let name2 = name1.clone();
+
+    println!("{} {}", name1, name2);
+}
