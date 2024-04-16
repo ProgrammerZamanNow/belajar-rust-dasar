@@ -118,3 +118,12 @@ fn boolean(){
 
     println!("{} {}", a, b);
 }
+
+#[test]
+fn comparison(){
+    let a = 20;
+    let b = 20;
+
+    let result : bool = a >= b;
+    println!("{}", result);
+}
