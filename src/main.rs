@@ -439,7 +439,7 @@ fn range_inclusive() {
     }
 }
 
-fn say_hello(){
+fn say_hello() {
     println!("Hello");
 }
 
@@ -487,7 +487,7 @@ fn test_factorial_loop() {
 fn print_text(value: String, times: u32) {
     if times == 0 {
         return;
-    }else {
+    } else {
         println!("{}", value);
     }
 
@@ -513,7 +513,7 @@ fn test_factorial_recursive() {
     println!("{}", result);
 }
 
-fn print_number(number: i32){
+fn print_number(number: i32) {
     println!("number {}", number);
 }
 
@@ -580,4 +580,18 @@ fn test_get_full_name() {
     println!("{}", full_name);
     println!("{}", first_name);
     println!("{}", last_name);
+}
+
+#[test]
+fn slice_reference() {
+    let array: [i32; 10] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    let slice1: &[i32] = &array[..];
+    println!("{:?}", slice1);
+
+    let slice2: &[i32] = &array[0..5];
+    println!("{:?}", slice2);
+
+    let slice3: &[i32] = &array[5..];
+    println!("{:?}", slice3);
 }
