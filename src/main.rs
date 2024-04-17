@@ -696,3 +696,189 @@ fn test_method() {
 
     println!("{}", person.first_name);
 }
+
+enum Level {
+    Regular,
+    Premium,
+    Platinum,
+}
+
+#[test]
+fn test_enum() {
+    let level: Level = Level::Premium;
+
+    match level {
+        Level::Regular => {
+            println!("Regular");
+        }
+        Level::Premium => {
+            println!("Premium");
+        }
+        Level::Platinum => {
+            println!("Platinum");
+        }
+    }
+}
+
+enum Payment {
+    CreditCard(String),
+    BankTransfer(String, String),
+    EWallet(String, String),
+}
+
+impl Payment {
+    fn pay(&self, amount: u32){
+        match self {
+            Payment::CreditCard(number) => {
+                println!("Paying with credit card {} amount {}", number, amount);
+            }
+            Payment::BankTransfer(bank, number) => {
+                println!("Paying with bank transfer {} {} amount {}", bank, number, amount);
+            }
+            Payment::EWallet(wallet, number) => {
+                println!("Paying with ewallet {} {} amount {}", wallet, number, amount);
+            }
+        }
+    }
+}
+
+#[test]
+fn test_payment() {
+    let _payment1: Payment = Payment::CreditCard(String::from("423423432"));
+    _payment1.pay(500000);
+
+    let _payment2: Payment = Payment::BankTransfer(String::from("BCA"), String::from("32423423"));
+    _payment2.pay(3423423);
+
+    let _payment3: Payment = Payment::EWallet(String::from("Gopay"), String::from("32423423"));
+    _payment3.pay(3453543);
+}
+
+#[test]
+fn test_match_value() {
+    let name = "Budi";
+
+    match name {
+        "Eko" => {
+            println!("Hello Eko");
+        }
+        "Budi" => {
+            println!("Hello Budi");
+        }
+        other => {
+            println!("Hello {}", other);
+        }
+    }
+
+    match name {
+        "Eko" | "Budi" | "Joko" => {
+            println!("Hello Bos");
+        }
+        other => {
+            println!("Hello {}", other);
+        }
+    }
+}
+
+#[test]
+fn test_range_patterns() {
+    let value = 67;
+    match value {
+        75..=100 => {
+            println!("Great")
+        }
+        50..=74 => {
+            println!("Good")
+        }
+        25..=49 => {
+            println!("Not Bad")
+        }
+        0..=24 => {
+            println!("Bad")
+        }
+        other => {
+            println!("Invalid value {}", other)
+        }
+    }
+}
+
+#[test]
+fn test_struct_patterns() {
+    let point = GeoPoint::new(2.0, 1.0);
+
+    match point {
+        GeoPoint(long, 0.0) => {
+            println!("long : {}", long);
+        }
+        GeoPoint(0.0, lat) => {
+            println!("lat : {}", lat);
+        }
+        GeoPoint(long, lat) => {
+            println!("long : {}, lat : {}", long, lat);
+        }
+    }
+
+    let person = Person{
+        first_name: String::from("Eko"),
+        middle_name: String::from("Kurniawan"),
+        last_name: String::from("Khannedy"),
+        age: 20,
+    };
+
+    match person {
+        Person { first_name, last_name, .. } => {
+            println!("{} {}", first_name, last_name);
+        }
+    }
+}
+
+#[test]
+fn test_ignoring() {
+    let point = GeoPoint::new(2.0, 1.0);
+
+    match point {
+        GeoPoint(long, _) => {
+            println!("long : {}", long);
+        }
+    }
+}
+
+#[test]
+fn test_ignoring_range() {
+    let value = 67;
+    match value {
+        75..=100 => {
+            println!("Great")
+        }
+        50..=74 => {
+            println!("Good")
+        }
+        25..=49 => {
+            println!("Not Bad")
+        }
+        0..=24 => {
+            println!("Bad")
+        }
+        _ => {
+            println!("Invalid value")
+        }
+    }
+}
+
+#[test]
+fn test_match_expression() {
+    let value = 9;
+
+    let result = match value {
+        0 => "nol",
+        1 => {
+            "satu"
+        },
+        2 => {
+            "dua"
+        },
+        _ => "invalid"
+    };
+
+    println!("{}", result);
+}
