@@ -614,6 +614,12 @@ struct Person {
     age: u8,
 }
 
+impl Person {
+    fn say_hello(&self, name: &str){
+        println!("Hello {}, my name is {}", name, self.first_name);
+    }
+}
+
 fn print_person(person: &Person){
     println!("{}", person.first_name);
     println!("{}", person.middle_name);
@@ -649,6 +655,19 @@ fn test_struct_person() {
 
 struct GeoPoint(f64, f64);
 
+impl GeoPoint {
+    fn new(long: f64, lat: f64) -> GeoPoint {
+        GeoPoint(long, lat)
+    }
+}
+
+#[test]
+fn test_associated_function() {
+    let geo_point:GeoPoint = GeoPoint::new(10.0, 10.0);
+    println!("{}", geo_point.0);
+    println!("{}", geo_point.1);
+}
+
 #[test]
 fn tuple_struct() {
     let geo_point = GeoPoint(-6.23223, 100.23232);
@@ -662,4 +681,18 @@ struct Nothing;
 fn test_nothing() {
     let _nothing1: Nothing = Nothing;
     let _nothing2: Nothing = Nothing{};
+}
+
+#[test]
+fn test_method() {
+    let person = Person{
+        first_name: String::from("Eko"),
+        middle_name: String::from("Eko"),
+        last_name: String::from("Eko"),
+        age: 20,
+    };
+
+    person.say_hello("Budi");
+
+    println!("{}", person.first_name);
 }
