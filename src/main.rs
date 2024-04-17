@@ -595,3 +595,71 @@ fn slice_reference() {
     let slice3: &[i32] = &array[5..];
     println!("{:?}", slice3);
 }
+
+#[test]
+fn string_slice() {
+    let name = String::from("Eko Kurniawan Khannedy");
+
+    let first_name: &str = &name[0..3];
+    println!("{}", first_name);
+
+    let last_name: &str = &name[14..];
+    println!("{}", last_name);
+}
+
+struct Person {
+    first_name: String,
+    middle_name: String,
+    last_name: String,
+    age: u8,
+}
+
+fn print_person(person: &Person){
+    println!("{}", person.first_name);
+    println!("{}", person.middle_name);
+    println!("{}", person.last_name);
+    println!("{}", person.age);
+}
+
+#[test]
+fn test_struct_person() {
+    let first_name = String::from("Eko");
+    let last_name = String::from("Khannedy");
+
+    let person: Person = Person{
+        age: 20,
+        first_name,
+        middle_name: String::from("Kurniawan"),
+        last_name,
+    };
+
+    print_person(&person);
+
+    let person2 = Person{
+        first_name: person.first_name.clone(),
+        middle_name: person.middle_name.clone(),
+        last_name: person.last_name.clone(),
+        ..person
+    };
+
+    print_person(&person2);
+
+    println!("{}", person.first_name);
+}
+
+struct GeoPoint(f64, f64);
+
+#[test]
+fn tuple_struct() {
+    let geo_point = GeoPoint(-6.23223, 100.23232);
+    println!("{}", geo_point.0);
+    println!("{}", geo_point.1);
+}
+
+struct Nothing;
+
+#[test]
+fn test_nothing() {
+    let _nothing1: Nothing = Nothing;
+    let _nothing2: Nothing = Nothing{};
+}
