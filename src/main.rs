@@ -615,12 +615,12 @@ struct Person {
 }
 
 impl Person {
-    fn say_hello(&self, name: &str){
+    fn say_hello(&self, name: &str) {
         println!("Hello {}, my name is {}", name, self.first_name);
     }
 }
 
-fn print_person(person: &Person){
+fn print_person(person: &Person) {
     println!("{}", person.first_name);
     println!("{}", person.middle_name);
     println!("{}", person.last_name);
@@ -632,7 +632,7 @@ fn test_struct_person() {
     let first_name = String::from("Eko");
     let last_name = String::from("Khannedy");
 
-    let person: Person = Person{
+    let person: Person = Person {
         age: 20,
         first_name,
         middle_name: String::from("Kurniawan"),
@@ -641,7 +641,7 @@ fn test_struct_person() {
 
     print_person(&person);
 
-    let person2 = Person{
+    let person2 = Person {
         first_name: person.first_name.clone(),
         middle_name: person.middle_name.clone(),
         last_name: person.last_name.clone(),
@@ -663,7 +663,7 @@ impl GeoPoint {
 
 #[test]
 fn test_associated_function() {
-    let geo_point:GeoPoint = GeoPoint::new(10.0, 10.0);
+    let geo_point: GeoPoint = GeoPoint::new(10.0, 10.0);
     println!("{}", geo_point.0);
     println!("{}", geo_point.1);
 }
@@ -680,12 +680,12 @@ struct Nothing;
 #[test]
 fn test_nothing() {
     let _nothing1: Nothing = Nothing;
-    let _nothing2: Nothing = Nothing{};
+    let _nothing2: Nothing = Nothing {};
 }
 
 #[test]
 fn test_method() {
-    let person = Person{
+    let person = Person {
         first_name: String::from("Eko"),
         middle_name: String::from("Eko"),
         last_name: String::from("Eko"),
@@ -727,7 +727,7 @@ enum Payment {
 }
 
 impl Payment {
-    fn pay(&self, amount: u32){
+    fn pay(&self, amount: u32) {
         match self {
             Payment::CreditCard(number) => {
                 println!("Paying with credit card {} amount {}", number, amount);
@@ -818,7 +818,7 @@ fn test_struct_patterns() {
         }
     }
 
-    let person = Person{
+    let person = Person {
         first_name: String::from("Eko"),
         middle_name: String::from("Kurniawan"),
         last_name: String::from("Khannedy"),
@@ -873,12 +873,34 @@ fn test_match_expression() {
         0 => "nol",
         1 => {
             "satu"
-        },
+        }
         2 => {
             "dua"
-        },
+        }
         _ => "invalid"
     };
 
     println!("{}", result);
+}
+
+type Age = u8;
+type IdentityNumber = String;
+
+struct Customer {
+    id: IdentityNumber,
+    name: String,
+    age: Age,
+}
+
+type Pelanggan = Customer;
+
+#[test]
+fn test_customer() {
+    let customer = Customer {
+        id: String::from("324234234"),
+        name: String::from("Eko"),
+        age: 20,
+    };
+
+    println!("{} {} {}", customer.id, customer.name, customer.age);
 }
