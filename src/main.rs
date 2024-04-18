@@ -1,14 +1,16 @@
 mod first;
 mod second;
+mod third;
 mod model;
 
-use first::say_hello;
-use second::say_hello as say_hello_second;
+use crate::first::say_hello;
+use crate::second::say_hello as say_hello_second;
 
 #[test]
 fn test_use() {
     say_hello();
     say_hello_second();
+    first::second::third::say_hello();
 }
 
 use model::User;
