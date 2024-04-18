@@ -1,3 +1,31 @@
+mod first;
+mod second;
+mod model;
+
+use first::say_hello;
+use second::say_hello as say_hello_second;
+
+#[test]
+fn test_use() {
+    say_hello();
+    say_hello_second();
+}
+
+use model::User;
+
+#[test]
+fn test_module() {
+    let user: User = User{
+        first_name: String::from("Eko"),
+        last_name: String::from("Khannedy"),
+        username: String::from("khannedy"),
+        email: String::from("khannedy@example.com"),
+        age: 20
+    };
+
+    user.say_hello("Budi");
+}
+
 fn main() {
     println!("Hello, world!");
 
@@ -439,9 +467,9 @@ fn range_inclusive() {
     }
 }
 
-fn say_hello() {
-    println!("Hello");
-}
+// fn say_hello() {
+//     println!("Hello");
+// }
 
 #[test]
 fn test_say_hello() {
