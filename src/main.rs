@@ -1151,14 +1151,14 @@ impl Add for Apple {
 
 #[test]
 fn test_operator_add() {
-    let apple1 = Apple{quantity: 10};
-    let apple2 = Apple{quantity: 10};
+    let apple1 = Apple { quantity: 10 };
+    let apple2 = Apple { quantity: 10 };
 
     let apple3 = apple1 + apple2;
     println!("{}", apple3.quantity);
 }
 
-fn double(value : Option<i32>) -> Option<i32> {
+fn double(value: Option<i32>) -> Option<i32> {
     match value {
         None => None,
         Some(i) => Some(i * 2),
@@ -1188,8 +1188,8 @@ impl PartialOrd for Apple {
 
 #[test]
 fn test_comparing() {
-    let apple1 = Apple{quantity: 10};
-    let apple2 = Apple{quantity: 20};
+    let apple1 = Apple { quantity: 10 };
+    let apple2 = Apple { quantity: 20 };
 
     println!("Apple1 == Apple2 : {}", apple1 == apple2);
     println!("Apple1 < Apple2 : {}", apple1 < apple2);
@@ -1230,9 +1230,9 @@ impl Debug for Category {
 
 #[test]
 fn test_format() {
-    let category = Category{
+    let category = Category {
         name: String::from("Gadget"),
-        id: String::from("GADGET")
+        id: String::from("GADGET"),
     };
 
     println!("{:?}", category);
@@ -1288,11 +1288,11 @@ fn test_closure_scope() {
 }
 
 struct Counter {
-    counter: i32
+    counter: i32,
 }
 
 impl Counter {
-    fn increment(&mut self){
+    fn increment(&mut self) {
         self.counter += 1;
         println!("Increment")
     }
@@ -1300,8 +1300,7 @@ impl Counter {
 
 #[test]
 fn test_counter() {
-
-    let mut counter = Counter{counter: 0};
+    let mut counter = Counter { counter: 0 };
     counter.increment();
     counter.increment();
     counter.increment();
@@ -1394,7 +1393,7 @@ fn test_btree_map() {
 
 #[test]
 fn test_hash_set() {
-    let mut set : HashSet<String> = HashSet::new();
+    let mut set: HashSet<String> = HashSet::new();
     set.insert(String::from("Eko"));
     set.insert(String::from("Eko"));
     set.insert(String::from("Kurniawan"));
@@ -1409,7 +1408,7 @@ fn test_hash_set() {
 
 #[test]
 fn test_btree_set() {
-    let mut set : BTreeSet<String> = BTreeSet::new();
+    let mut set: BTreeSet<String> = BTreeSet::new();
     set.insert(String::from("Eko"));
     set.insert(String::from("Eko"));
     set.insert(String::from("Kurniawan"));
@@ -1420,4 +1419,36 @@ fn test_btree_set() {
     for value in set {
         println!("{}", value);
     }
+}
+
+#[test]
+fn test_iterator() {
+    let array: [i32; 5] = [1, 2, 3, 4, 5];
+    let mut iterator = array.iter();
+
+    while let Some(value) = iterator.next() {
+        println!("{}", value);
+    }
+
+    for value in iterator {
+        println!("{}", value);
+    }
+}
+
+#[test]
+fn test_iterator_method() {
+    let vector: Vec<i32> = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    println!("{:?}", vector);
+
+    let sum: i32 = vector.iter().sum();
+    println!("{}", sum);
+
+    let count: usize = vector.iter().count();
+    println!("{}", count);
+
+    let doubled: Vec<i32> = vector.iter().map(|x| x * 2).collect();
+    println!("{:?}", doubled);
+
+    let odd: Vec<&i32> = vector.iter().filter(|x| *x % 2 != 0).collect();
+    println!("{:?}", odd);
 }
