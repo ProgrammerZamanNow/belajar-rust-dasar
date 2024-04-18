@@ -1133,7 +1133,7 @@ impl<T> GetValue<T> for Point<T> where T: PartialOrd {
 
 use core::ops::Add;
 use std::cmp::Ordering;
-use std::collections::{BTreeMap, HashMap, LinkedList, VecDeque};
+use std::collections::{BTreeMap, BTreeSet, HashMap, HashSet, LinkedList, VecDeque};
 
 struct Apple {
     quantity: i32,
@@ -1389,5 +1389,35 @@ fn test_btree_map() {
 
     for entry in map {
         println!("{} : {}", entry.0, entry.1);
+    }
+}
+
+#[test]
+fn test_hash_set() {
+    let mut set : HashSet<String> = HashSet::new();
+    set.insert(String::from("Eko"));
+    set.insert(String::from("Eko"));
+    set.insert(String::from("Kurniawan"));
+    set.insert(String::from("Kurniawan"));
+    set.insert(String::from("Khannedy"));
+    set.insert(String::from("Khannedy"));
+
+    for value in set {
+        println!("{}", value);
+    }
+}
+
+#[test]
+fn test_btree_set() {
+    let mut set : BTreeSet<String> = BTreeSet::new();
+    set.insert(String::from("Eko"));
+    set.insert(String::from("Eko"));
+    set.insert(String::from("Kurniawan"));
+    set.insert(String::from("Kurniawan"));
+    set.insert(String::from("Khannedy"));
+    set.insert(String::from("Khannedy"));
+
+    for value in set {
+        println!("{}", value);
     }
 }
