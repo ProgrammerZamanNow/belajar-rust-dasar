@@ -1130,3 +1130,44 @@ impl<T> GetValue<T> for Point<T> where T: PartialOrd {
         &self.x
     }
 }
+
+use core::ops::Add;
+
+struct Apple {
+    quantity: i32,
+}
+
+impl Add for Apple {
+    type Output = Apple;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Apple {
+            quantity: self.quantity + rhs.quantity
+        }
+    }
+}
+
+#[test]
+fn test_operator_add() {
+    let apple1 = Apple{quantity: 10};
+    let apple2 = Apple{quantity: 10};
+
+    let apple3 = apple1 + apple2;
+    println!("{}", apple3.quantity);
+}
+
+fn double(value : Option<i32>) -> Option<i32> {
+    match value {
+        None => None,
+        Some(i) => Some(i * 2),
+    }
+}
+
+#[test]
+fn test_option() {
+    let result = double(Some(10));
+    println!("{:?}", result);
+
+    let result = double(None);
+    println!("{:?}", result);
+}
