@@ -1236,3 +1236,74 @@ fn test_format() {
 
     println!("{:?}", category);
 }
+
+#[test]
+fn test_closure() {
+    let sum: fn(i32, i32) -> i32 = |value1: i32, value2: i32| -> i32 {
+        value1 + value1
+    };
+
+    let result = sum(10, 10);
+    println!("{}", result);
+}
+
+fn print_with_filter(value: String, filter: fn(String) -> String) {
+    let result = filter(value);
+    println!("{}", result);
+}
+
+#[test]
+fn test_closure_as_parameter() {
+    let filter = |value: String| -> String {
+        value.to_uppercase()
+    };
+
+    print_with_filter(String::from("Eko"), filter);
+}
+
+fn to_uppercase(value: String) -> String {
+    value.to_uppercase()
+}
+
+#[test]
+fn test_function_as_closure() {
+    print_with_filter(String::from("Eko"), to_uppercase);
+}
+
+#[test]
+fn test_closure_scope() {
+    let mut counter = 0;
+
+    let mut increment = || {
+        counter += 1;
+        println!("Increment");
+    };
+
+    increment();
+    increment();
+    increment();
+
+    println!("Counter {}", counter);
+}
+
+struct Counter {
+    counter: i32
+}
+
+impl Counter {
+    fn increment(&mut self){
+        self.counter += 1;
+        println!("Increment")
+    }
+}
+
+#[test]
+fn test_counter() {
+
+    let mut counter = Counter{counter: 0};
+    counter.increment();
+    counter.increment();
+    counter.increment();
+
+    println!("Counter {}", counter.counter);
+}
