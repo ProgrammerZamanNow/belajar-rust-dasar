@@ -1133,7 +1133,7 @@ impl<T> GetValue<T> for Point<T> where T: PartialOrd {
 
 use core::ops::Add;
 use std::cmp::Ordering;
-use std::collections::{LinkedList, VecDeque};
+use std::collections::{BTreeMap, HashMap, LinkedList, VecDeque};
 
 struct Apple {
     quantity: i32,
@@ -1355,5 +1355,39 @@ fn test_linked_list() {
 
     for name in &names {
         println!("{}", name);
+    }
+}
+
+#[test]
+fn test_hash_map() {
+    let mut map: HashMap<String, String> = HashMap::new();
+    map.insert(String::from("name"), String::from("Eko"));
+    map.insert(String::from("age"), String::from("26"));
+    map.insert(String::from("country"), String::from("Indonesia"));
+    map.insert(String::from("zountry"), String::from("Indonesia"));
+    map.insert(String::from("xountry"), String::from("Indonesia"));
+
+    let name = map.get("name");
+    let age = map.get("age");
+
+    println!("Name {}", name.unwrap());
+    println!("Age {}", age.unwrap());
+
+    for entry in map {
+        println!("{} : {}", entry.0, entry.1);
+    }
+}
+
+#[test]
+fn test_btree_map() {
+    let mut map: BTreeMap<String, String> = BTreeMap::new();
+    map.insert(String::from("name"), String::from("Eko"));
+    map.insert(String::from("age"), String::from("26"));
+    map.insert(String::from("country"), String::from("Indonesia"));
+    map.insert(String::from("zountry"), String::from("Indonesia"));
+    map.insert(String::from("xountry"), String::from("Indonesia"));
+
+    for entry in map {
+        println!("{} : {}", entry.0, entry.1);
     }
 }
