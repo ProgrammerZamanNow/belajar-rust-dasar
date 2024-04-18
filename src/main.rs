@@ -1133,6 +1133,7 @@ impl<T> GetValue<T> for Point<T> where T: PartialOrd {
 
 use core::ops::Add;
 use std::cmp::Ordering;
+use std::collections::{LinkedList, VecDeque};
 
 struct Apple {
     quantity: i32,
@@ -1306,4 +1307,53 @@ fn test_counter() {
     counter.increment();
 
     println!("Counter {}", counter.counter);
+}
+
+#[test]
+fn test_vector() {
+    let array = ["Eko", "Kurniawan", "Khannedy"];
+
+    for value in array {
+        println!("{}", value);
+    }
+
+    println!("{:?}", array);
+
+    let mut names: Vec<String> = Vec::<String>::new();
+    names.push(String::from("Eko"));
+    names.push(String::from("Kurniawan"));
+    names.push(String::from("Khannedy"));
+
+    for name in &names {
+        println!("{}", name);
+    }
+
+    println!("{:?}", names);
+    println!("{}", names[0]);
+}
+
+#[test]
+fn test_vector_deque() {
+    let mut names: VecDeque<String> = VecDeque::<String>::new();
+    names.push_back(String::from("Eko"));
+    names.push_back(String::from("Kurniawan"));
+    names.push_front(String::from("Khannedy"));
+
+    for name in &names {
+        println!("{}", name);
+    }
+
+    println!("{}", names[1]);
+}
+
+#[test]
+fn test_linked_list() {
+    let mut names: LinkedList<String> = LinkedList::<String>::new();
+    names.push_back(String::from("Eko"));
+    names.push_back(String::from("Kurniawan"));
+    names.push_front(String::from("Khannedy"));
+
+    for name in &names {
+        println!("{}", name);
+    }
 }
