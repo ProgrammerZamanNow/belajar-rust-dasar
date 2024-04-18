@@ -1194,3 +1194,19 @@ fn test_comparing() {
     println!("Apple1 < Apple2 : {}", apple1 < apple2);
     println!("Apple1 > Apple2 : {}", apple1 > apple2);
 }
+
+#[test]
+fn test_string_manipulation() {
+    let s = String::from("Eko Kurniawan Khannedy");
+
+    println!("{}", s.to_uppercase());
+    println!("{}", s.to_lowercase());
+    println!("{}", s.len());
+    println!("{}", s.replace("Eko", "Budi"));
+    println!("{}", s.contains("Khannedy"));
+    println!("{}", s.starts_with("Eko"));
+    println!("{}", s.ends_with("Khannedy"));
+    println!("{}", s.trim());
+    println!("{}", &s[0..3]);
+    println!("{:?}", s.get(0..3));
+}
