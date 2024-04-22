@@ -1610,7 +1610,7 @@ struct Teacher<'a, ID> where ID: Ord {
 fn test_lifetime_annotation_generic() {
     let teacher: Teacher<i32> = Teacher {
         id: 10,
-        name:"Eko",
+        name: "Eko",
     };
     println!("{}", teacher.id);
     println!("{}", teacher.name);
@@ -1625,16 +1625,16 @@ struct Company {
 
 #[test]
 fn test_attribute_derive() {
-    let company = Company{
+    let company = Company {
         name: "Programmer Zaman Now".to_string(),
         location: "Indonesia".to_string(),
-        website: "https://www.programmerzamannow.com/".to_string()
+        website: "https://www.programmerzamannow.com/".to_string(),
     };
 
-    let company2 = Company{
+    let company2 = Company {
         name: "Programmer Zaman Now".to_string(),
         location: "Indonesia".to_string(),
-        website: "https://www.programmerzamannow.com/".to_string()
+        website: "https://www.programmerzamannow.com/".to_string(),
     };
 
     println!("{:?}", company);
@@ -1644,4 +1644,43 @@ fn test_attribute_derive() {
 
     let result = company > company2;
     println!("{}", result);
+}
+
+#[test]
+fn test_box() {
+    let value: Box<i32> = Box::new(10);
+    println!("{}", value);
+    display_number(*value);
+    display_number_reference(&value);
+}
+
+fn display_number(value: i32){
+    println!("{}", value);
+}
+
+fn display_number_reference(value: &i32){
+    println!("{}", value);
+}
+
+#[derive(Debug)]
+enum ProductCategory {
+    Of(String, Box<ProductCategory>),
+    End
+}
+
+#[test]
+fn test_box_enum() {
+    let category = ProductCategory::Of(
+        "Laptop".to_string(),
+        Box::new(ProductCategory::Of(
+            "Dell".to_string(),
+            Box::new(ProductCategory::End)
+        )),
+    );
+    println!("{:?}", category);
+    print_category(&category);
+}
+
+fn print_category(category: &ProductCategory) {
+    println!("{:?}", category);
 }
