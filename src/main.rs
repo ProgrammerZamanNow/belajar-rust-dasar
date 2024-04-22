@@ -1742,3 +1742,30 @@ fn test_drop() {
     let book = Book { title: "Rust Programming".to_string() };
     println!("{}", book.title)
 }
+
+use std::rc::Rc;
+
+enum Brand {
+    Of(String, Rc<Brand>),
+    End
+}
+
+#[test]
+fn test_multiple_ownership() {
+    let apple: Rc<Brand> = Rc::new(Brand::Of("Apple".to_string(), Rc::new(Brand::End)));
+    println!("Apple reference count : {}", Rc::strong_count(&apple));
+
+    let laptop: Brand = Brand::Of("Laptop".to_string(), Rc::clone(&apple));
+    println!("Apple reference count : {}", Rc::strong_count(&apple));
+
+    {
+        let smartphone: Brand = Brand::Of("Smartphone".to_string(), Rc::clone(&apple));
+        println!("Apple reference count : {}", Rc::strong_count(&apple));
+    }
+
+    println!("Apple reference count : {}", Rc::strong_count(&apple));
+
+    // let apple = ProductCategory::Of("Apple".to_string(), Box::new(ProductCategory::End));
+    // let laptop = ProductCategory::Of("Laptop".to_string(), Box::new(apple));
+    // let smartphone = ProductCategory::Of("Smartphone".to_string(), Box::new(apple));
+}
