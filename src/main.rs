@@ -1747,7 +1747,7 @@ use std::rc::Rc;
 
 enum Brand {
     Of(String, Rc<Brand>),
-    End
+    End,
 }
 
 #[test]
@@ -1783,7 +1783,7 @@ struct Seller {
 fn test_ref_cell() {
     let seller = Seller {
         name: RefCell::new("Eko".to_string()),
-        active: RefCell::new(true)
+        active: RefCell::new(true),
     };
 
     {
@@ -1803,7 +1803,7 @@ fn test_static() {
 
 static mut COUNTER: u32 = 0;
 
-unsafe fn increment(){
+unsafe fn increment() {
     COUNTER += 1;
 }
 
@@ -1814,4 +1814,45 @@ fn test_unsafe() {
         COUNTER += 1;
         println!("Counter : {}", COUNTER);
     }
+}
+
+macro_rules! hi {
+    () => {
+        println!("Hi Macro!")
+    };
+    ($name: expr) => {
+        println!("Hi {}!", $name);
+    }
+}
+
+#[test]
+fn test_macro() {
+    hi!();
+    hi!("Eko");
+    hi! {
+        "Eko"
+    }
+    ;
+
+    let name = "Eko";
+    hi!(name);
+}
+
+macro_rules! iterate {
+    ($array: expr) => {
+        for i in $array {
+            println!("{}", i);
+        }
+    };
+    ($($item: expr), *) => {
+        $(
+            println!("{}", $item);
+        )*
+    }
+}
+
+#[test]
+fn test_macro_iterate() {
+    iterate!([1,2,3,4,5,6,7,8,9,10]);
+    iterate!(1,2,3,4,5,6,7,8,9,10);
 }
