@@ -1700,7 +1700,7 @@ struct MyValue<T> {
 
 use std::ops::Deref;
 
-impl<T> Deref for MyValue<T>{
+impl<T> Deref for MyValue<T> {
     type Target = T;
 
     fn deref(&self) -> &Self::Target {
@@ -1721,8 +1721,24 @@ fn say_hello_reference(name: &String) {
 
 #[test]
 fn test_deref_reference() {
-    let name = MyValue{
+    let name = MyValue {
         value: "Eko".to_string()
     };
     say_hello_reference(&name);
+}
+
+struct Book {
+    title: String,
+}
+
+impl Drop for Book {
+    fn drop(&mut self) {
+        println!("Dropping Book: {}", self.title)
+    }
+}
+
+#[test]
+fn test_drop() {
+    let book = Book { title: "Rust Programming".to_string() };
+    println!("{}", book.title)
 }
