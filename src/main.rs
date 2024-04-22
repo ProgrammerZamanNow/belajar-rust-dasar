@@ -1654,18 +1654,18 @@ fn test_box() {
     display_number_reference(&value);
 }
 
-fn display_number(value: i32){
+fn display_number(value: i32) {
     println!("{}", value);
 }
 
-fn display_number_reference(value: &i32){
+fn display_number_reference(value: &i32) {
     println!("{}", value);
 }
 
 #[derive(Debug)]
 enum ProductCategory {
     Of(String, Box<ProductCategory>),
-    End
+    End,
 }
 
 #[test]
@@ -1674,7 +1674,7 @@ fn test_box_enum() {
         "Laptop".to_string(),
         Box::new(ProductCategory::Of(
             "Dell".to_string(),
-            Box::new(ProductCategory::End)
+            Box::new(ProductCategory::End),
         )),
     );
     println!("{:?}", category);
@@ -1683,4 +1683,46 @@ fn test_box_enum() {
 
 fn print_category(category: &ProductCategory) {
     println!("{:?}", category);
+}
+
+#[test]
+fn test_dereference() {
+    let value1 = Box::new(10);
+    let value2 = Box::new(20);
+
+    let result: i32 = *value1 * *value2;
+    println!("{}", result);
+}
+
+struct MyValue<T> {
+    value: T,
+}
+
+use std::ops::Deref;
+
+impl<T> Deref for MyValue<T>{
+    type Target = T;
+
+    fn deref(&self) -> &Self::Target {
+        &self.value
+    }
+}
+
+#[test]
+fn test_dereference_struct() {
+    let value = MyValue { value: 10 };
+    let real_value: i32 = *value;
+    println!("value {}", real_value);
+}
+
+fn say_hello_reference(name: &String) {
+    println!("Hello {}", name);
+}
+
+#[test]
+fn test_deref_reference() {
+    let name = MyValue{
+        value: "Eko".to_string()
+    };
+    say_hello_reference(&name);
 }
