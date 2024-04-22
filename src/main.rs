@@ -1769,3 +1769,27 @@ fn test_multiple_ownership() {
     // let laptop = ProductCategory::Of("Laptop".to_string(), Box::new(apple));
     // let smartphone = ProductCategory::Of("Smartphone".to_string(), Box::new(apple));
 }
+
+use std::cell::RefCell;
+use std::cell::RefMut;
+
+#[derive(Debug)]
+struct Seller {
+    name: RefCell<String>,
+    active: RefCell<bool>,
+}
+
+#[test]
+fn test_ref_cell() {
+    let seller = Seller {
+        name: RefCell::new("Eko".to_string()),
+        active: RefCell::new(true)
+    };
+
+    {
+        let mut result: RefMut<String> = seller.name.borrow_mut();
+        *result = "Budi".to_string();
+    }
+
+    println!("{:?}", seller);
+}
