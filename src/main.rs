@@ -1793,3 +1793,25 @@ fn test_ref_cell() {
 
     println!("{:?}", seller);
 }
+
+static APPLICATION: &str = "My Application";
+
+#[test]
+fn test_static() {
+    println!("{}", APPLICATION);
+}
+
+static mut COUNTER: u32 = 0;
+
+unsafe fn increment(){
+    COUNTER += 1;
+}
+
+#[test]
+fn test_unsafe() {
+    unsafe {
+        increment();
+        COUNTER += 1;
+        println!("Counter : {}", COUNTER);
+    }
+}
